@@ -1,0 +1,18 @@
+INSTALLATION INSTRUCTIONS
+=========================
+
+1. su to root
+
+2. cd to the directory where the sio2bsd archive has been unpacked to
+
+3. gmake install
+
+The Makefile is prepared for FreeBSD and Linux, and the resulting binary 
+will be copied to /usr/local/bin. You may want to edit some defaults in 
+the Makefile.
+
+As of version 1.10 you may also try to compile the program under Cygwin. 
+In this case it is enough to unpack the program, go to the directory where 
+it was unpacked to, and do 'make'. Tested with Cygwin 1.7.7.
+
+/* EOF */
