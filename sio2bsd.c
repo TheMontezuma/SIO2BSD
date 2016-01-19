@@ -714,7 +714,7 @@ com_read(uchar *buf, int size, const ushort type)
 			r = read(serial_fd, buf+i, 1);
 			if (r < 0)
 			{
-				printf("FATAL: %s(): %s (%d)\n", __FUNCTION__, strerror(errno), errno);
+				printf("FATAL: %s(): %s (%d)\n", __extension__ __FUNCTION__, strerror(errno), errno);
 				sig(0);
 			}
 			i += r;
@@ -732,7 +732,7 @@ com_read(uchar *buf, int size, const ushort type)
 			r = read(serial_fd, buf+i, 1);
 			if (r < 0)
 			{
-				printf("FATAL: %s(): %s (%d)\n", __FUNCTION__, strerror(errno), errno);
+				printf("FATAL: %s(): %s (%d)\n", __extension__ __FUNCTION__, strerror(errno), errno);
 				sig(0);
 			}
 # ifdef COMMAND_LINE
@@ -834,7 +834,7 @@ com_write(uchar *buf, int size)
 		r = write(serial_fd, buf, size);
 		if (r < 0)
 		{
-			printf("FATAL: %s(): %s (%d)\n", __FUNCTION__, strerror(errno), errno);
+			printf("FATAL: %s(): %s (%d)\n", __extension__ __FUNCTION__, strerror(errno), errno);
 			sig(0);
 		}
 		i += r;
@@ -1008,7 +1008,7 @@ atr_open(char *fname, int full13force)
 
 	if ((r = stat(fname, &sb)) < 0)
 	{
-		printf("Error: %s() cannot stat() '%s', %s (%d)\n", __FUNCTION__, fname, strerror(errno), errno);
+		printf("Error: %s() cannot stat() '%s', %s (%d)\n", __extension__ __FUNCTION__, fname, strerror(errno), errno);
 		return -1;
 	}
 
@@ -1276,7 +1276,7 @@ error:
 	if (d)
 		sio_ack(3, d, 'E');
 
-	printf("Error: %s() failed\n", __FUNCTION__);
+	printf("Error: %s() failed\n", __extension__ __FUNCTION__);
 }
 
 static int
@@ -1941,7 +1941,7 @@ check_dos_name(char *newpath, struct dirent *dp, struct stat *sb)
 	strcpy(fname, dp->d_name);
 
 	if (log_flag)
-		printf("%s: got fname '%s'\n", __FUNCTION__, fname); 
+		printf("%s: got fname '%s'\n", __extension__ __FUNCTION__, fname); 
 
 	if (validate_dos_name(fname))
 		return 1;
@@ -1950,7 +1950,7 @@ check_dos_name(char *newpath, struct dirent *dp, struct stat *sb)
 	sprintf(temp_fspec, "%s/%s", newpath, fname);
 
 	if (log_flag)
-		printf("%s: stat '%s'\n", __FUNCTION__, temp_fspec);
+		printf("%s: stat '%s'\n", __extension__ __FUNCTION__, temp_fspec);
 
 	if (stat(temp_fspec, sb))
 		return 1;
@@ -2678,7 +2678,7 @@ do_pclink(uchar devno, uchar ccom, uchar caux1, uchar caux2)
 			iodesc[handle].fppos = newpos;
 		else
 		{
-			if (newpos <= iodesc[handle].fpstat.st_size)
+			if (newpos <= (ulong)iodesc[handle].fpstat.st_size)
 				iodesc[handle].fppos = newpos;
 			else
 				device[devno][cunit].status.err = 166;
